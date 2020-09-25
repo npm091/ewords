@@ -1,0 +1,8 @@
+SQLALCHEMY_DATABASE_URI = 'sqlite:///ewords.db'
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+DEBUG = True
+SECRET_KEY = 'secret key'
+HOST = '0.0.0.0'
+# HOST = '127.0.0.1'
+PORT = 8080
+MAX_PAGE = 108

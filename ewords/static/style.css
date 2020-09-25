@@ -1,0 +1,57 @@
+body {
+  font-size: 50pt;
+}
+
+table {
+  border-collapse: collapse;
+  /* 隣接するセルの罫線を重ねて表示する */
+  font-family: "メイリオ", sans-serif;
+  /* フォントのスタイルを指定する */
+  color: #000000;
+  /* フォントの色を指定する */
+  width: 100%;
+  /* テーブルの横幅を指定する */
+}
+
+td,
+th {
+  border: 1px solid #000000;
+  /* 境界線を実線で指定する */
+  background-color: rgba(0, 0, 0, 0.052);
+  /* 背景色を指定する */
+  text-align: center;
+  /* インライン要素の位置を指定する */
+  padding: 3px;
+  /* 要素の余白を指定する(上下左右) */
+}
+
+td {
+  text-align: left;
+  font-size: 60pt;
+}
+
+th {
+  font-size: 10pt;
+  background-color: #31A9EE;
+  /* 見出しの背景色を指定する */
+}
+
+select {
+  text-align: left;
+  font-size: 40pt;
+}
+
+option {
+  text-align: left;
+  font-size: 10pt;
+}
+
+button {
+  text-align: left;
+  font-size: 50pt;
+}
+
+input {
+  text-align: left;
+  font-size: 40pt;
+}

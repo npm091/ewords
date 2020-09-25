@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST">
+  <select name="page" onchange="showPage(this.value, 0);">
+  {% for n in range(1, maxPage+1) %}
+    <option value="{{n}}" {{'selected' if n == page else ''}}>{{n}}</option>
+  {% endfor %}
+  </select>
+  &nbsp;
+  <button type='button' onCLick="showPage(0, -1)">D</button>&nbsp;
+  <button type='button' onClick="showPage(0, 1)">U</button>&nbsp;
+  <input type="text" id="word" name="word" size="10">
+  <button onClick="searchWord()">F</button>
+  <input type='hidden' id='srchWord' name='srchWord' value='' />
+
+  {{ table }}
+</form>
+{% endblock %}
+

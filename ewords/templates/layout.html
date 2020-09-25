@@ -1,0 +1,52 @@
+<!doctype html>
+<title>Flask Blog</title>
+
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+
+<script type="text/javascript">
+  function showPage(page, count) {
+    if (page != 0) {
+      // case that select page number
+      window.sessionStorage.setItem(['pageSave'], page);
+    } else {
+      // case that up or down button
+      page = window.sessionStorage.getItem(['pageSave']);
+      var ipage = Number(page)
+      if ((count < 0) && (ipage+count) < 1) {
+        // return if down button and to be lower than page 1
+          return;
+      }
+      // both case for up & down button
+      ipage = ipage + count
+      window.sessionStorage.setItem(['pageSave'], String(ipage));
+    }
+    var newPage = window.sessionStorage.getItem(['pageSave']);
+    var frm = document.querySelector("form");
+    frm.setAttribute("action", '/?page=' + newPage);
+    document.querySelector("form").submit();
+  }
+
+  function searchWord() {
+    var word = document.getElementById('word').value;
+    document.getElementById('srchWord').value = word
+      // window.location.replace('/find/?word=' + word);
+    var f = document.querySelector("form");
+    var a = f.setAttribute("action", '/find/?word=' + word);
+    document.querySelector("form").submit();
+  }
+</script>
+
+<div class="container">
+
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-info" role="alert">
+    {{ message }}
+  </div>
+  {% endfor %}
+
+  <div class="blog-body">
+    {% block body %}
+    {% endblock %}
+  </div>
+
+</div>
