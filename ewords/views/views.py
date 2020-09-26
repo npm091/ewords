@@ -37,14 +37,24 @@ def show_page():
 @app.route('/find/', methods=['GET', 'POST'])
 def search_word():
     maxPage = app.config['MAX_PAGE']
-    searchWord = request.args.get('word', '')
-    ptn = re.compile("^.*" + searchWord + ".*$")
-    items = Entry.query.filter().order_by(Entry.id.asc()).all()
-    newList = []
-    print(request.form.get('srchWord'))
-    for item in items:
-        m = ptn.match(item.english)
-        if m:
-            newList.append(item)
-    table = ItemTable(newList)
+    # searchWord = request.args.get('word', '')
+    searchWord = request.form.get('hWord')
+    ptn = re.compile(r"[-+\$^\[\]]+")
+    try:
+        if ptn.match(searchWord):
+            print("regular expression")
+            ptn = re.compile(searchWord)
+        else:
+            ptn = re.compile("^.*" + searchWord + ".*$")
+        ptn = re.compile("^.*" + searchWord + ".*$")
+        items = Entry.query.filter().order_by(Entry.id.asc()).all()
+        newList = []
+        for item in items:
+            m = ptn.match(item.english)
+            if m:
+                newList.append(item)
+        table = ItemTable(newList)
+    except:
+        table = "expression error"
     return render_template('entries/index.html', title='Ewords', table=table, maxPage=int(maxPage), page=1)
+

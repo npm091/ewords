@@ -11,29 +11,35 @@
     } else {
       // case that up or down button
       page = window.sessionStorage.getItem(['pageSave']);
-      var ipage = Number(page)
-      if ((count < 0) && (ipage+count) < 1) {
+      let ipage = Number(page)
+      if ((count < 0) && (ipage + count) < 1) {
         // return if down button and to be lower than page 1
-          return;
+        return;
       }
       // both case for up & down button
       ipage = ipage + count
       window.sessionStorage.setItem(['pageSave'], String(ipage));
     }
-    var newPage = window.sessionStorage.getItem(['pageSave']);
-    var frm = document.querySelector("form");
+    let newPage = window.sessionStorage.getItem(['pageSave']);
+    let frm = document.querySelector("form");
     frm.setAttribute("action", '/?page=' + newPage);
     document.querySelector("form").submit();
   }
 
   function searchWord() {
-    var word = document.getElementById('word').value;
-    document.getElementById('srchWord').value = word
-      // window.location.replace('/find/?word=' + word);
-    var f = document.querySelector("form");
-    var a = f.setAttribute("action", '/find/?word=' + word);
+    let word = document.getElementById('word').value;
+    document.getElementById('hWord').value = word
+    window.sessionStorage.setItem(['hWord'], word);
+    let f = document.querySelector("form");
+    let a = f.setAttribute("action", '/find/?word=' + word);
     document.querySelector("form").submit();
   }
+
+  function load() {
+    let hWord = window.sessionStorage.getItem(['hWord']);
+    document.getElementById('word').value = hWord;
+  }
+  window.onload = load;
 </script>
 
 <div class="container">
@@ -45,8 +51,7 @@
   {% endfor %}
 
   <div class="blog-body">
-    {% block body %}
-    {% endblock %}
+    {% block body %} {% endblock %}
   </div>
 
 </div>
